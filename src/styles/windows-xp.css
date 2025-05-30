@@ -1,0 +1,9 @@
+/* Windows XP Theme Styles */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.window-header {
+  user-select: none;
+}
