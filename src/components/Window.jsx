@@ -28,3 +28,5 @@ function Window({ title, content, onClose }) {
     </Draggable>
   );
 }
+
+export default Window
