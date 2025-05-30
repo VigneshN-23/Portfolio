@@ -17,11 +17,11 @@ function App() {
   };
 
   return (
-    <div className="h-screen overflow-hidden bg-[#245EDC] relative">
+    <div className="h-screen overflow-hidden relative xp-desktop">
       <Desktop onOpenFolder={handleOpenFolder} openWindows={openWindows} onCloseWindow={handleCloseWindow} />
       <Taskbar openWindows={openWindows} />
     </div>
   );
 }
 
-export default App
+export default App;

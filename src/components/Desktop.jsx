@@ -6,83 +6,122 @@ const folders = [
   { 
     id: 'about', 
     title: 'About Me', 
-    icon: '🧑‍💻', 
-    content: `About Me
-
-I am a dedicated Level 1 Penetration Tester with a passion for identifying and exploiting security vulnerabilities to help organizations strengthen their defenses.
-
-Experience:
-• 2+ years of hands-on penetration testing
-• Expertise in vulnerability assessment and analysis
-• Strong background in network security
-• Proven track record of responsible disclosure`
+    icon: '👤', 
+    content: `<div class="content-section">
+      <div class="content-title">About Me</div>
+      <p>Dedicated Level 1 Penetration Tester with a passion for cybersecurity and a proven track record in identifying and exploiting security vulnerabilities to strengthen organizational defenses.</p>
+      
+      <div class="content-title">Experience</div>
+      <ul class="content-list">
+        <li>2+ years of hands-on penetration testing experience</li>
+        <li>Expertise in vulnerability assessment and analysis</li>
+        <li>Strong background in network security</li>
+        <li>Proven track record of responsible disclosure</li>
+      </ul>
+    </div>`
   },
   { 
     id: 'skills', 
     title: 'Skills', 
     icon: '🛠️', 
-    content: `Technical Skills
+    content: `<div class="content-section">
+      <div class="content-title">Technical Skills</div>
+      <ul class="content-list">
+        <li>Network Penetration Testing</li>
+        <li>Web Application Security Testing</li>
+        <li>Vulnerability Assessment</li>
+        <li>Social Engineering</li>
+        <li>Security Tool Development</li>
+        <li>Report Writing</li>
+      </ul>
 
-• Network Penetration Testing
-• Web Application Security Testing
-• Vulnerability Assessment
-• Social Engineering
-• Security Tool Development
-• Report Writing
-• OWASP Top 10
-• Burp Suite
-• Metasploit
-• Nmap
-• Wireshark`
+      <div class="content-title">Tools Proficiency</div>
+      <ul class="content-list">
+        <li>Burp Suite Professional</li>
+        <li>Metasploit Framework</li>
+        <li>Nmap & Wireshark</li>
+        <li>OWASP ZAP</li>
+        <li>Kali Linux</li>
+      </ul>
+    </div>`
   },
   { 
     id: 'projects', 
     title: 'Projects', 
     icon: '📁', 
-    content: `Notable Projects
+    content: `<div class="content-section">
+      <div class="content-title">Notable Projects</div>
 
-1. Corporate Network Assessment
-• Conducted full-scale penetration test
-• Identified 3 critical vulnerabilities
-• Provided detailed remediation steps
+      <div class="content-section">
+        <strong>Corporate Network Assessment</strong>
+        <ul class="content-list">
+          <li>Conducted full-scale penetration test</li>
+          <li>Identified 3 critical vulnerabilities</li>
+          <li>Provided detailed remediation steps</li>
+        </ul>
+      </div>
 
-2. Web Application Security Audit
-• Discovered SQL injection vulnerability
-• Prevented potential data breach
-• Implemented security best practices
+      <div class="content-section">
+        <strong>Web Application Security Audit</strong>
+        <ul class="content-list">
+          <li>Discovered SQL injection vulnerability</li>
+          <li>Prevented potential data breach</li>
+          <li>Implemented security best practices</li>
+        </ul>
+      </div>
 
-3. Social Engineering Campaign
-• Developed phishing awareness program
-• Reduced click-through rate by 75%
-• Trained 200+ employees`
+      <div class="content-section">
+        <strong>Social Engineering Campaign</strong>
+        <ul class="content-list">
+          <li>Developed phishing awareness program</li>
+          <li>Reduced click-through rate by 75%</li>
+          <li>Trained 200+ employees</li>
+        </ul>
+      </div>
+    </div>`
   },
   { 
     id: 'certifications', 
     title: 'Certifications', 
     icon: '📜', 
-    content: `Professional Certifications
+    content: `<div class="content-section">
+      <div class="content-title">Professional Certifications</div>
+      <ul class="content-list">
+        <li>Offensive Security Certified Professional (OSCP)</li>
+        <li>Certified Ethical Hacker (CEH)</li>
+        <li>CompTIA Security+</li>
+        <li>GIAC Web Application Penetration Tester (GWAPT)</li>
+        <li>Burp Suite Certified Practitioner</li>
+      </ul>
 
-• Offensive Security Certified Professional (OSCP)
-• Certified Ethical Hacker (CEH)
-• CompTIA Security+
-• GIAC Web Application Penetration Tester (GWAPT)
-• Burp Suite Certified Practitioner`
+      <div class="content-title">Additional Training</div>
+      <ul class="content-list">
+        <li>Advanced Web Application Security</li>
+        <li>Network Defense Essentials</li>
+        <li>Mobile Application Security</li>
+      </ul>
+    </div>`
   },
   { 
     id: 'contact', 
     title: 'Contact', 
     icon: '📧', 
-    content: `Contact Information
+    content: `<div class="content-section">
+      <div class="content-title">Contact Information</div>
+      <ul class="content-list">
+        <li>Email: pentester@securemail.com</li>
+        <li>LinkedIn: linkedin.com/in/pentester</li>
+        <li>GitHub: github.com/pentester</li>
+      </ul>
 
-Email: pentester@securemail.com
-LinkedIn: linkedin.com/in/pentester
-GitHub: github.com/pentester
-
-Available for:
-• Security Consultations
-• Penetration Testing Projects
-• Security Training
-• Speaking Engagements`
+      <div class="content-title">Available For</div>
+      <ul class="content-list">
+        <li>Security Consultations</li>
+        <li>Penetration Testing Projects</li>
+        <li>Security Training</li>
+        <li>Speaking Engagements</li>
+      </ul>
+    </div>`
   }
 ];
 
@@ -100,16 +139,20 @@ function Desktop({ onOpenFolder, openWindows, onCloseWindow }) {
         ))}
       </div>
       
-      {openWindows.map((window) => (
+      {openWindows.map((window, index) => (
         <Window
           key={window.id}
           title={window.title}
           content={window.content}
           onClose={() => onCloseWindow(window.id)}
+          style={{
+            top: `${50 + index * 30}px`,
+            left: `${50 + index * 30}px`
+          }}
         />
       ))}
     </div>
   );
 }
 
-export default Desktop
+export default Desktop;

@@ -15,6 +15,9 @@ body {
 .window {
   border: 1px solid #0A246A;
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+  min-width: 400px;
+  max-width: 600px;
+  min-height: 300px;
 }
 
 .start-button {
@@ -32,7 +35,64 @@ body {
 .window-content {
   background: #fff;
   border: 1px solid #D4D0C8;
-  padding: 8px;
+  padding: 16px;
+  font-size: 14px;
+  line-height: 1.6;
+  height: calc(100% - 32px);
+  overflow-y: auto;
+}
+
+.xp-desktop {
+  background-image: url('https://images.pexels.com/photos/1323712/pexels-photo-1323712.jpeg?auto=compress&cs=tinysrgb&w=1920');
+  background-size: cover;
+  background-position: center;
+}
+
+.window-button {
+  width: 24px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 12px;
-  line-height: 1.5;
+  border: 1px solid #003C74;
+}
+
+.window-button:hover {
+  background-color: #E5E3D3;
+}
+
+.close-button:hover {
+  background-color: #ff3333;
+  color: white;
+}
+
+/* Content Styling */
+.content-section {
+  margin-bottom: 16px;
+}
+
+.content-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #003C74;
+  margin-bottom: 8px;
+}
+
+.content-list {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.content-list li {
+  margin-bottom: 8px;
+  padding-left: 20px;
+  position: relative;
+}
+
+.content-list li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #003C74;
 }
