@@ -1,25 +1,31 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { format } from 'date-fns';
 
-function Taskbar({ openWindows }) {
+function Taskbar() {
+  const [currentTime, setCurrentTime] = useState(new Date());
+  const [batteryLevel, setBatteryLevel] = useState(100);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
   return (
-    <div className="h-10 bg-gradient-to-r from-[#245EDC] to-[#A6CAF0] fixed bottom-0 w-full flex items-center px-2 border-t border-[#0A246A]">
-      <button className="start-button text-white px-4 py-1 rounded mr-2 flex items-center gap-2">
-        <span className="text-xl">🪟</span>
-        <span className="font-semibold">Start</span>
-      </button>
-      <div className="flex gap-2">
-        {openWindows.map((window) => (
-          <div
-            key={window.id}
-            className="taskbar-item text-white px-4 py-1 rounded flex items-center gap-2"
-          >
-            <span className="text-xl">📂</span>
-            <span>{window.title}</span>
-          </div>
-        ))}
+    <div className="taskbar h-[30px] fixed top-0 w-full flex items-center justify-between px-4 text-sm">
+      <div className="flex items-center gap-4">
+        <button className="hover:bg-gray-700 px-3 py-1 rounded">Applications</button>
+      </div>
+      
+      <div className="flex items-center gap-4">
+        <span>🌐 Connected</span>
+        <span>🔋 {batteryLevel}%</span>
+        <span>{format(currentTime, 'EEE MMM d HH:mm:ss')}</span>
       </div>
     </div>
   );
 }
 
-export default Taskbar
+export default Taskbar;

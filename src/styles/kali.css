@@ -1,0 +1,81 @@
+/* Kali Linux Theme */
+:root {
+  --kali-dark: #1F2229;
+  --kali-blue: #0066CC;
+  --kali-red: #FF0033;
+  --terminal-bg: rgba(0, 0, 0, 0.85);
+}
+
+.bg-kali-dark {
+  background-color: var(--kali-dark);
+}
+
+.terminal-window {
+  background-color: var(--terminal-bg);
+  border: 1px solid #333;
+  border-radius: 6px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.taskbar {
+  background-color: #2B2E37;
+  border-bottom: 1px solid #1A1C22;
+}
+
+.desktop-icon {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.desktop-icon:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.desktop-icon-text {
+  margin-top: 8px;
+  font-size: 12px;
+  text-align: center;
+  color: white;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+}
+
+.xterm {
+  padding: 8px;
+}
+
+.window-controls {
+  display: flex;
+  gap: 4px;
+}
+
+.window-button {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+}
+
+.close-button {
+  background-color: #FF5F56;
+}
+
+.minimize-button {
+  background-color: #FFBD2E;
+}
+
+.maximize-button {
+  background-color: #27C93F;
+}
+
+.window-title {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 14px;
+}

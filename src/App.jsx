@@ -1,25 +1,40 @@
 import React, { useState } from 'react';
 import Desktop from './components/Desktop';
 import Taskbar from './components/Taskbar';
-import './styles/windows-xp.css';
+import Terminal from './components/Terminal';
+import './styles/kali.css';
 
 function App() {
-  const [openWindows, setOpenWindows] = useState([]);
+  const [isTerminalOpen, setIsTerminalOpen] = useState(false);
+  const [terminalInstances, setTerminalInstances] = useState([]);
 
-  const handleOpenFolder = (folder) => {
-    if (!openWindows.find(w => w.id === folder.id)) {
-      setOpenWindows([...openWindows, folder]);
+  const openNewTerminal = () => {
+    const newTerminal = {
+      id: Date.now(),
+      position: { x: 50 + terminalInstances.length * 30, y: 50 + terminalInstances.length * 30 }
+    };
+    setTerminalInstances([...terminalInstances, newTerminal]);
+    setIsTerminalOpen(true);
+  };
+
+  const closeTerminal = (id) => {
+    setTerminalInstances(terminalInstances.filter(term => term.id !== id));
+    if (terminalInstances.length <= 1) {
+      setIsTerminalOpen(false);
     }
   };
 
-  const handleCloseWindow = (folderId) => {
-    setOpenWindows(openWindows.filter(w => w.id !== folderId));
-  };
-
   return (
-    <div className="h-screen overflow-hidden relative xp-desktop">
-      <Desktop onOpenFolder={handleOpenFolder} openWindows={openWindows} onCloseWindow={handleCloseWindow} />
-      <Taskbar openWindows={openWindows} />
+    <div className="h-screen overflow-hidden bg-kali-dark text-white">
+      <Taskbar />
+      <Desktop onOpenTerminal={openNewTerminal} />
+      {terminalInstances.map((terminal) => (
+        <Terminal
+          key={terminal.id}
+          initialPosition={terminal.position}
+          onClose={() => closeTerminal(terminal.id)}
+        />
+      ))}
     </div>
   );
 }
