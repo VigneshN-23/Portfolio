@@ -94,27 +94,37 @@ Just kidding - I'm ethically finding vulnerabilities to make the internet safer!
         theme: {
           background: '#1E1E1E',
           foreground: '#F8F8F8',
-        }
+        },
+        rows: 40,
+        cols: 100
       });
 
       const fitAddon = new FitAddon();
       xtermRef.current.loadAddon(fitAddon);
       xtermRef.current.open(terminalRef.current);
       
-      // Defer the fit operation to the next event loop cycle
+      // Defer the fit operation to ensure proper dimensions
       setTimeout(() => {
         fitAddon.fit();
       }, 0);
 
-      let command = '';
+      // Initial welcome message
+      xtermRef.current.write('\x1b[1;32mWelcome to Vignesh\'s Portfolio Terminal!\x1b[0m\r\n');
+      xtermRef.current.write('Type "vignesh -h" for available commands\r\n\r\n');
       xtermRef.current.write('vignesh@portfolio:~$ ');
 
+      let command = '';
+      let commandHistory = [];
+      let historyIndex = -1;
+
       xtermRef.current.onKey(({ key, domEvent }) => {
-        const char = key;
-        
+        const printable = !domEvent.altKey && !domEvent.ctrlKey && !domEvent.metaKey;
+
         if (domEvent.keyCode === 13) { // Enter
           xtermRef.current.write('\r\n');
           if (command.trim()) {
+            commandHistory.push(command.trim());
+            historyIndex = commandHistory.length;
             const output = commands[command.trim()] 
               ? commands[command.trim()]() 
               : `Command not found: ${command}\r\nType 'vignesh -h' for available commands`;
@@ -127,11 +137,39 @@ Just kidding - I'm ethically finding vulnerabilities to make the internet safer!
             command = command.slice(0, -1);
             xtermRef.current.write('\b \b');
           }
-        } else {
-          command += char;
-          xtermRef.current.write(char);
+        } else if (domEvent.keyCode === 38) { // Up arrow
+          if (historyIndex > 0) {
+            historyIndex--;
+            command = commandHistory[historyIndex];
+            xtermRef.current.write('\x1b[2K\r'); // Clear current line
+            xtermRef.current.write('vignesh@portfolio:~$ ' + command);
+          }
+        } else if (domEvent.keyCode === 40) { // Down arrow
+          if (historyIndex < commandHistory.length - 1) {
+            historyIndex++;
+            command = commandHistory[historyIndex];
+            xtermRef.current.write('\x1b[2K\r'); // Clear current line
+            xtermRef.current.write('vignesh@portfolio:~$ ' + command);
+          } else if (historyIndex === commandHistory.length - 1) {
+            historyIndex = commandHistory.length;
+            command = '';
+            xtermRef.current.write('\x1b[2K\r'); // Clear current line
+            xtermRef.current.write('vignesh@portfolio:~$ ');
+          }
+        } else if (printable) {
+          command += key;
+          xtermRef.current.write(key);
         }
       });
+
+      // Handle window resize
+      const handleResize = () => {
+        fitAddon.fit();
+      };
+      window.addEventListener('resize', handleResize);
+      return () => {
+        window.removeEventListener('resize', handleResize);
+      };
     }
 
     return () => {
@@ -146,7 +184,7 @@ Just kidding - I'm ethically finding vulnerabilities to make the internet safer!
       defaultPosition={initialPosition}
       handle=".terminal-handle"
     >
-      <div className="terminal-window fixed w-[600px]">
+      <div className="terminal-window fixed w-screen h-[calc(100vh-30px)]">
         <div className="terminal-handle bg-gray-800 p-2 flex items-center justify-between rounded-t-lg cursor-move">
           <div className="window-controls">
             <button className="window-button close-button" onClick={onClose}></button>
@@ -156,7 +194,7 @@ Just kidding - I'm ethically finding vulnerabilities to make the internet safer!
           <span className="window-title">Terminal</span>
           <div className="w-[60px]"></div>
         </div>
-        <div ref={terminalRef} className="h-[400px]" />
+        <div ref={terminalRef} className="h-[calc(100vh-70px)]" />
       </div>
     </Draggable>
   );
