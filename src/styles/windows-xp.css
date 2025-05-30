@@ -7,3 +7,32 @@ body {
 .window-header {
   user-select: none;
 }
+
+.desktop-icon-text {
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);
+}
+
+.window {
+  border: 1px solid #0A246A;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.start-button {
+  background: linear-gradient(180deg, #3C81F3 0%, #245EDC 100%);
+  border: 1px solid #0A246A;
+  box-shadow: inset 1px 1px rgba(255, 255, 255, 0.3);
+}
+
+.taskbar-item {
+  background: linear-gradient(180deg, #3C81F3 0%, #245EDC 100%);
+  border: 1px solid #0A246A;
+  box-shadow: inset 1px 1px rgba(255, 255, 255, 0.3);
+}
+
+.window-content {
+  background: #fff;
+  border: 1px solid #D4D0C8;
+  padding: 8px;
+  font-size: 12px;
+  line-height: 1.5;
+}
