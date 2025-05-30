@@ -100,7 +100,11 @@ Just kidding - I'm ethically finding vulnerabilities to make the internet safer!
       const fitAddon = new FitAddon();
       xtermRef.current.loadAddon(fitAddon);
       xtermRef.current.open(terminalRef.current);
-      fitAddon.fit();
+      
+      // Defer the fit operation to the next event loop cycle
+      setTimeout(() => {
+        fitAddon.fit();
+      }, 0);
 
       let command = '';
       xtermRef.current.write('vignesh@portfolio:~$ ');
